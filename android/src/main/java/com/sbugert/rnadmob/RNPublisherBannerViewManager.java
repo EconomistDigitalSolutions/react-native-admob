@@ -159,15 +159,16 @@ class ReactPublisherAdView extends ReactViewGroup implements AppEventListener {
                 adRequestBuilder.addTestDevice(testDevice);
             }
         }
-        PublisherAdRequest adRequest = adRequestBuilder.build();
 
         Iterator<Map.Entry<String, Object>> iterator = this.customTargeting.getEntryIterator();
 
         while (iterator.hasNext()) {
             Map.Entry<String, Object> mapEntry = iterator.next();
 
-            adRequest.addCustomTargeting(mapEntry.getKey(), (String) mapEntry.getValue());
+            adRequestBuilder.addCustomTargeting(mapEntry.getKey(), (String) mapEntry.getValue());
         }
+
+        PublisherAdRequest adRequest = adRequestBuilder.build();
 
         this.adView.loadAd(adRequest);
     }
